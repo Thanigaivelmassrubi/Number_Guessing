@@ -1,0 +1,153 @@
+<html>
+<head>
+  <title>Number Guessing Game </title>  
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png"> 
+  <style>
+    body{
+	 margin: 0;
+	 <!--background-color: #F6FBF4;-->
+	 background-color: #FF2EBE9;
+	}
+	
+	#main_div{
+	 width: 100%;
+	 height: 100%;
+	 border: 1px solid blue;	  
+	}
+	
+	#inner_div
+	{
+	  margin: 10% 30%;
+	  border : 3px dashed red;
+      border-radius : 20px;
+	  height: 30%;
+      padding : 2%;	 
+      background-color: none;	  
+	}	
+		
+	#ok_button
+	{
+	  display:block;
+	  margin-left : 35%;
+	  margin-top : 7%;
+	  width: 30%;
+	  padding : 7px;  
+      border-radius:10px;
+      border : 1px solid red;	 
+      cursor : pointer;	  
+	  font-size:14px;
+	  letter-spacing:2px;
+	  font-weight:bold;
+	}
+	
+	#ok_button:hover{
+	   color:red;
+	   border : 1px solid black;
+	   font-size:14px;
+	}
+	
+	#lbl{
+	color: red;
+	font-weight:bold;	 
+    font-size: 24px;
+    margin: 7%;		
+	}
+	
+	#text_box{
+	margin-left : 10px;
+	height: 10%;
+	width: 7%;
+	color : blue;
+	font-weight:bold;
+	font-size: 18px;	
+	margin-top : 7%;
+	}
+	
+  #greet_lbl{
+    margin : 5%;
+	font-size : 32px;
+	color: red;  
+  }	
+
+  #cmt_lbl{
+    font-size: 20px;
+	margin-top: 3%;
+	
+	
+   
+  }  
+  </style>   
+  <script>
+  window.onload = function() {
+  document.getElementById("text_box").focus();}
+  let randNum = Math.floor((Math.random() * 100) + 1);
+  let counter = 10;
+  var cmt;
+  var msg;
+  
+  function chk_num(evt) { 
+  var ASCIICode = (evt.which) ? evt.which : evt.keyCode 
+  if(ASCIICode >= 48 && ASCIICode <= 57)      
+	 return true;
+  else 
+    alert('Enter only Numbers...');  
+	return false;  
+ }
+ 
+ function chk_ans()
+ {   
+   if(counter >= 1)
+   {  var num = document.getElementById("text_box").value; 	      
+      if(num === "")
+        alert("Enter any number..") ;    
+      else if(num >= 1 && num <= 100)    
+      {  counter = counter - 1;   	     
+	     if(num == randNum)
+	     { counter = 0;
+		   msg = "You Guessed Correctly!";
+	       }
+	     else if(num > randNum)
+	       { if(counter > 0)		   
+		       {msg = "" + num + " is Higher than my number.You have more " + counter + " Try again!";}
+	         else 
+			   {msg = "Good Try! the number is " + randNum;}
+			
+		   }
+	     else
+	       {if(counter > 0)		   
+		       {msg = "" + num + " is Lower than my number.You have more " + counter + " Try again!";}
+	         else 
+			   {msg = "Good Try! the number is " + randNum;}
+			
+		  }
+	   cmt = document.getElementById("cmt_lbl").innerHTML;	
+	   if(counter == 9 || counter == 0 || counter == 4)
+	    document.getElementById("cmt_lbl").innerHTML = msg; 	
+       else
+	    document.getElementById("cmt_lbl").innerHTML = (cmt + "<br>"+msg); 	
+     } 
+    else
+     {
+      alert("Enter numbers only between the range of 1 to 100");
+     }
+    document.getElementById("text_box").value = ""; 
+    document.getElementById("text_box").focus();
+  }
+  else{
+    alert("Refresh the page to start again...")
+  }
+  }
+</script> 
+</head>
+<body>
+  <div id = "main_div">
+   <center><h2 id = "greet_lbl">Welcome To <br> <i>Number Guessing Game</i></h2></center>
+   <div id = "inner_div">      
+     <span id="lbl">Guess the Number between the range of 1 to 100 :<span><input type = "text" id = "text_box"  maxlength = 3 onkeypress="return chk_num(event)" ></input> 
+	  <Button id ="ok_button" onclick = "chk_ans()">Submit</button>    
+      <center><p id = "cmt_lbl"></p></center> 	  
+   </div>	
+ </div>
+</body>
+</html>
